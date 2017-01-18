@@ -1,0 +1,26 @@
+<snippet>
+	<content><![CDATA[
+for x in ${1:arrayName}; do
+	i = ${2:initialValue}
+	until [ \$i = "${3:maxValue}" ]; do    # Tune this to increase retry attempts
+		${4:"command"}
+		retval = \$?
+		i = \$((\$i+1))
+		if [ $retval = "0" ]; then
+			break
+		else
+			sleep ${5:sleepValue}          # Tune this to increase sleep time between retry attempts
+		fi  
+	done
+	if [ \$retval != 0 ]; then
+		${6:echo "Error Message Here"}
+	fi
+done
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>forwithcounter</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.shell</scope>
+	<!-- Optional: Description to show in the menu -->
+	<!-- <description>Bash Loop with a incrementing counter</description> -->
+</snippet> 
